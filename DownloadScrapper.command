@@ -13,9 +13,9 @@ pdfs = " " # "/Users/name/Downloads/pdfs"
 
 
 list = os.listdir(downloads)
-types = ["pdf","MOV","HEIC", "jpeg", "JPG","PNG","png"]
+pdfType = ["pdf"]
 pictureType = ["HEIC", "jpeg", "JPG", "PNG", "png", "JPEG", "heic", "jpg"]
-movieType = ["mov"]
+movieType = ["MOV","mov"]
 
 
 print(len(list))
@@ -25,7 +25,7 @@ for idx in range(len(list)):
         print(f"hidden file at index: {idx}")
     else:
         temp = list[idx].split(".")
-        if len(temp) >= 2 and (temp[-1] in types or temp[-1] in pictureType or temp[-1] in movieType):
+        if len(temp) >= 2 and (temp[-1] in pdfType or temp[-1] in pictureType or temp[-1] in movieType):
             if temp[-1] in pictureType:
                 sh.move(f"{downloads}/{list[idx]}",pictures)
             elif temp[-1] in movieType:
