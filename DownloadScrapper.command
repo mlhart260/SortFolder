@@ -10,6 +10,7 @@ downloads = " " # "/Users/yourname/Downloads"
 movies = " " # "/Users/name/Downloads/movies"
 pictures = " " # "/Users/name/Downloads/pictures"
 pdfs = " " # "/Users/name/Downloads/pdfs"
+screenshots = " " #"/Users/name/Downloads/pictures/screenshots"
 
 
 list = os.listdir(downloads)
@@ -23,15 +24,34 @@ print(len(list))
 for idx in range(len(list)):
     if list[idx][0] == ".":
         print(f"hidden file at index: {idx}")
+    if "Screen Shot" in list[idx]:
+       try:
+            sh.move(f"{downloads}/{list[idx]}",screenshots) 
+       except sh.Error:
+
+           print(f"duplicate screenshot found? {list[idx]}")
+
     else:
         temp = list[idx].split(".")
         if len(temp) >= 2 and (temp[-1] in pdfType or temp[-1] in pictureType or temp[-1] in movieType):
             if temp[-1] in pictureType:
-                sh.move(f"{downloads}/{list[idx]}",pictures)
+                try:
+                    sh.move(f"{downloads}/{list[idx]}",pictures)
+                except sh.Error:
+
+                    print(f"duplicate picture found? {list[idx]}")
             elif temp[-1] in movieType:
-                sh.move(f"{downloads}/{list[idx]}",movies)
+                try:
+                    sh.move(f"{downloads}/{list[idx]}",movies)
+                except sh.Error:
+
+                    print(f"duplicate movie found? {list[idx]}")
             elif temp[-1] == "pdf":
-                sh.move(f"{downloads}/{list[idx]}",pdfs)
+                try:
+                    sh.move(f"{downloads}/{list[idx]}",pdfs)
+                except sh.Error:
+
+                    print(f"Duplicate pdf found? {list[idx]} ")
             else:
                 print(f"skipped at index {idx}")
 
